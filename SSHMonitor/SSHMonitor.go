@@ -48,7 +48,7 @@ func main() {
 	// Set the log output to the log file
 	log.SetOutput(logFile)
 
-	err = godotenv.Load()
+	err = godotenv.Load("../.env")
 	if err != nil {
 		log.Fatalln("Error loading .env file")
 	}
