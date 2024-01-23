@@ -38,8 +38,11 @@ type embed struct {
 }
 
 func main() {
-
-	logFile, err := os.OpenFile("logfile.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	fname := "logfile.log"
+	if len(os.Args[1:]) == 1 {
+		fname = os.Args[1]
+	}
+	logFile, err := os.OpenFile(fname, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -48,7 +51,7 @@ func main() {
 	// Set the log output to the log file
 	log.SetOutput(logFile)
 
-	err = godotenv.Load("../.env")
+	err = godotenv.Load("./.env")
 	if err != nil {
 		log.Fatalln("Error loading .env file")
 	}
